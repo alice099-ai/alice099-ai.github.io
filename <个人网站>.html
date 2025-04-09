@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>春夏 | 资深数据产品经理</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自定义样式 */
+        .gradient-text {
+            background: linear-gradient(90deg, #0ea5e9, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* 自定义动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* 项目卡片特效 */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .project-card:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="font-bold text-xl gradient-text">春夏</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#about" class="border-primary-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            关于我
+                        </a>
+                        <a href="#projects" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            作品展示
+                        </a>
+                        <a href="#skills" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            专业技能
+                        </a>
+                        <a href="#contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            联系方式
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <div class="flex space-x-4">
+                        <a href="https://agent101.cn/" target="_blank" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">个人网站</span>
+                            <i class="fas fa-globe text-xl"></i>
+                        </a>
+                        <a href="#" target="_blank" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">微信公众号</span>
+                            <i class="fab fa-weixin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" aria-expanded="false">
+                        <span class="sr-only">打开主菜单</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#about" class="bg-primary-50 border-primary-500 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    关于我
+                </a>
+                <a href="#projects" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    作品展示
+                </a>
+                <a href="#skills" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    专业技能
+                </a>
+                <a href="#contact" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    联系方式
+                </a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                <div class="flex items-center px-4">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full" src="https://picsum.photos/200/200?random=99" alt="个人头像">
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-base font-medium text-gray-800">春夏</div>
+                        <div class="text-sm font-medium text-gray-500">资深数据产品经理</div>
+                    </div>
+                </div>
+                <div class="mt-3 space-y-1">
+                    <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
+                        <i class="fab fa-weixin mr-2"></i>微信公众号：产品第一性
+                    </a>
+                    <a href="https://agent101.cn/" target="_blank" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
+                        <i class="fas fa-globe mr-2"></i>个人网站
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <div id="about" class="hero-pattern py-12 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2 animate-fadeIn" style="animation-delay: 0.1s;">
+                    <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                        <span class="block">你好，我是</span>
+                        <span class="block gradient-text">春夏</span>
+                    </h1>
+                    <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg md:mt-5 md:text-xl">
+                        资深数据产品经理 | 让数据服务于业务
+                    </p>
+                    <div class="mt-6 text-gray-600">
+                        <p class="mb-4">
+                            <i class="fas fa-check-circle text-primary-500 mr-2"></i>
+                            <span class="font-medium">企业数字化转型：</span>已助力完成5000+规模企业数字化落地
+                        </p>
+                        <p class="mb-4">
+                            <i class="fas fa-check-circle text-primary-500 mr-2"></i>
+                            <span class="font-medium">全栈产品经理：</span>使用AI不写一行代码，实现产品商业化
+                        </p>
+                    </div>
+                    <div class="mt-8 flex flex-col sm:flex-row sm:gap-3">
+                        <div class="rounded-md shadow">
+                            <a href="#projects" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10 btn-hover">
+                                查看作品
+                            </a>
+                        </div>
+                        <div class="mt-3 sm:mt-0">
+                            <a href="#contact" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 md:py-4 md:text-lg md:px-10 btn-hover">
+                                联系我
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 lg:mt-0 lg:w-1/2 animate-fadeIn" style="animation-delay: 0.3s;">
+                    <img class="w-full rounded-lg shadow-xl animate-float" src="https://picsum.photos/800/600?random=1" alt="个人形象展示">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 作品展示 -->
+    <div id="projects" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    作品展示
+                </h2>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                    我的AI产品和数字化转型项目
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- 作品卡片1 -->
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden card-hover project-card animate-fadeIn" style="animation-delay: 0.1s;">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="https://picsum.photos/600/400?random=2" alt="春节红包封面生成工具">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-primary-600">
+                                <span class="hover:underline">AI工具</span>
+                            </p>
+                            <a href="https://hongbao.agent101.cn/" target="_blank" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">春节红包封面生成工具</p>
+                                <p class="mt-3 text-base text-gray-500">基于AI技术的红包封面定制工具，让用户轻松创建个性化春节红包。</p>
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://hongbao.agent101.cn/" target="_blank" class="text-primary-600 hover:text-primary-500 font-medium flex items-center">
+                                访问网站 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品卡片2 -->
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden card-hover project-card animate-fadeIn" style="animation-delay: 0.2s;">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="https://picsum.photos/600/400?random=3" alt="决明子-AI辅助决策工具">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-secondary-600">
+                                <span class="hover:underline">决策工具</span>
+                            </p>
+                            <a href="https://jueming.agent101.cn/" target="_blank" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">决明子-AI辅助决策工具</p>
+                                <p class="mt-3 text-base text-gray-500">利用人工智能技术辅助企业和个人进行复杂决策分析，提高决策效率和准确性。</p>
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://jueming.agent101.cn/" target="_blank" class="text-secondary-600 hover:text-secondary-500 font-medium flex items-center">
+                                访问网站 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品卡片3 -->
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden card-hover project-card animate-fadeIn" style="animation-delay: 0.3s;">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="https://picsum.photos/600/400?random=4" alt="Agent 101 智能体指北">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-green-600">
+                                <span class="hover:underline">知识库</span>
+                            </p>
+                            <a href="https://agent101.feishu.cn/wiki/KLarwIA1piLrBYk7bf2cBf3HnNe" target="_blank" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">Agent 101 智能体指北</p>
+                                <p class="mt-3 text-base text-gray-500">全面介绍AI智能体技术的知识库，帮助开发者和产品经理了解和应用智能体技术。</p>
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://agent101.feishu.cn/wiki/KLarwIA1piLrBYk7bf2cBf3HnNe" target="_blank" class="text-green-600 hover:text-green-500 font-medium flex items-center">
+                                访问网站 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品卡片4 -->
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden card-hover project-card animate-fadeIn" style="animation-delay: 0.4s;">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="https://picsum.photos/600/400?random=5" alt="唯庸的AI公开课">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-blue-600">
+                                <span class="hover:underline">教育</span>
+                            </p>
+                            <a href="https://agent101.cn/" target="_blank" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">唯庸的AI公开课</p>
+                                <p class="mt-3 text-base text-gray-500">系统化的AI学习课程，从入门到精通，帮助各行业人士掌握AI应用技能。</p>
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://agent101.cn/" target="_blank" class="text-blue-600 hover:text-blue-500 font-medium flex items-center">
+                                访问网站 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品卡片5 -->
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden card-hover project-card animate-fadeIn" style="animation-delay: 0.5s;">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="https://picsum.photos/600/400?random=6" alt="AI应用从小白到专家">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-purple-600">
+                                <span class="hover:underline">出版物</span>
+                            </p>
+                            <a href="#" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">《AI应用从小白到专家》</p>
+                                <p class="mt-3 text-base text-gray-500">即将出版的AI应用指南，系统讲解AI技术在各行业的应用方法和实践案例。</p>
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <span class="text-purple-600 font-medium flex items-center">
+                                即将出版 <i class="fas fa-hourglass-half ml-1"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 专业技能 -->
+    <div id="skills" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    专业技能
+                </h2>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                    我的专业领域和核心能力
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-8 lg:grid-cols-3">
+                <!-- 技能卡片1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover animate-fadeIn" style="animation-delay: 0.1s;">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white mb-5">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">数据分析与可视化</h3>
+                        <p class="text-gray-600 mb-5">
+                            精通数据分析方法和工具，能够从复杂数据中提取有价值的业务洞察，并通过直观的可视化呈现。
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-1 h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary-500 rounded-full" style="width: 95%"></div>
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-primary-600">95%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技能卡片2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover animate-fadeIn" style="animation-delay: 0.2s;">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-secondary-500 text-white mb-5">
+                            <i class="fas fa-robot text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">AI产品设计与开发</h3>
+                        <p class="text-gray-600 mb-5">
+                            深入理解AI技术原理和应用场景，能够设计和开发实用的AI产品，解决实际业务问题。
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-1 h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-secondary-500 rounded-full" style="width: 90%"></div>
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-secondary-600">90%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技能卡片3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover animate-fadeIn" style="animation-delay: 0.3s;">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white mb-5">
+                            <i class="fas fa-building text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">企业数字化转型</h3>
+                        <p class="text-gray-600 mb-5">
+                            丰富的企业数字化转型经验，能够制定完整的数字化战略，并推动落地实施，提升企业运营效率。
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-1 h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-green-500 rounded-full" style="width: 92%"></div>
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-green-600">92%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 公众号展示 -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                        <span class="block">关注我的公众号</span>
+                        <span class="block gradient-text">产品第一性</span>
+                    </h2>
+                    <p class="mt-3 max-w-md text-lg text-gray-500">
+                        分享AI产品设计、数据分析和企业数字化转型的最新思考和实践经验。
+                    </p>
+                    <div class="mt-8">
+                        <div class="inline-flex rounded-md shadow">
+                            <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 btn-hover">
+                                <i class="fab fa-weixin mr-2"></i> 立即关注
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 lg:mt-0 lg:w-1/3">
+                    <img class="w-full rounded-lg shadow-lg" src="https://picsum.photos/400/400?random=7" alt="公众号二维码">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 联系方式 -->
+    <div id="contact" class="bg-primary-700 py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px
